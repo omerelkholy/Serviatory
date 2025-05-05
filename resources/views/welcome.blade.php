@@ -27,6 +27,7 @@
             --accent-color: #3b82f6; /* Accent blue */
             --secondary-accent: #4f46e5; /* Secondary accent */
             --success-color: #10b981; /* Success green */
+            --danger-color: #ee0f0f;
         }
 
         * {
@@ -121,6 +122,14 @@
             background-color: #2563eb;
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-logout{
+            background-color: var(--danger-color);
+        }
+
+        .btn-logout:hover {
+            background-color: #9C0502;
         }
 
         /* Hero Section */
@@ -837,18 +846,29 @@
 </div>
 
 <div class="container">
-    <!-- Navigation -->
     <nav>
         <div class="logo">
             <img src="{{asset("serviatory.png")}}" alt="Serviatory">
         </div>
         <div class="nav-buttons">
-            <a href="/login" class="btn btn-login">
-                <i class="fas fa-sign-in-alt"></i> Login
-            </a>
-            <a href="/register" class="btn btn-register">
-                <i class="fas fa-user-plus"></i> Register
-            </a>
+            @guest
+                <a href="{{ route('login') }}" class="btn btn-login">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </a>
+                <a href="{{ route('register') }}" class="btn btn-register">
+                    <i class="fas fa-user-plus"></i> Register
+                </a>
+            @else
+                <a href="{{auth()->user()->role === "admin" ?  route('dashboard.index') : route('services.index')}}" class="btn btn-login">
+                    <i class="{{auth()->user()->role === "admin" ? "fas fa-tachometer-alt" : "fa-solid fa-ticket"}}"></i> {{auth()->user()->role === "admin" ? "Dashboard" : "Services"}}
+                </a>
+                <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-register btn-logout">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            @endguest
         </div>
     </nav>
 
@@ -1043,6 +1063,8 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
 </section>
 
 <!-- Footer -->

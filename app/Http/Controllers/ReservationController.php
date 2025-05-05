@@ -129,7 +129,7 @@ class ReservationController extends Controller
             ["reservation_date", $validated['reservation_date']],
             ["reservation_time", $validated['reservation_time']]
         ])->where("id", "!=", $reservation->id)
-            ->whereIn("status", ["pending", "confirmed"])
+            ->whereIn("status", "pending")
             ->exists();
 
         if ($sameReservationexists) {

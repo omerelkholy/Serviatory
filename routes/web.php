@@ -24,8 +24,6 @@ Route::middleware('auth')->group(function () {
     Route::resource("/services", ServiceController::class);
     Route::resource("reservations", ReservationController::class);
     Route::patch('/reservations/{id}/cancel', [ReservationController::class, 'cancel'])->name("reservations.cancel");
-    Route::patch('/reservations/{id}/confirm', [ReservationController::class, 'confirm'])->name("reservations.confirm");
-    Route::patch('/reservations/{id}/reject', [ReservationController::class, 'reject'])->name("reservations.reject");
 
 });
 
@@ -39,6 +37,9 @@ Route::middleware(['auth', 'admin'])->group(function (){
     Route::get("/dashboard/users/edit/{id}", [UserController::class, "edit"])->name("dashboard.userEdit");
     Route::patch("/dashboard/users/{id}", [UserController::class, "update"])->name("dashboard.userUpdate");
     Route::delete("/dashboard/users/destroy/{id}", [UserController::class, "destroy"])->name("dashboard.userDestroy");
+
+    Route::patch('/reservations/{id}/confirm', [ReservationController::class, 'confirm'])->name("reservations.confirm");
+    Route::patch('/reservations/{id}/reject', [ReservationController::class, 'reject'])->name("reservations.reject");
 });
 
 

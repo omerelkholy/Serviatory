@@ -1,7 +1,7 @@
 <img src="/public/serviatory.png" alt="Serviatory">
 
 ## About Serviatory
-Seviatory is a site for reservation of specific created services and with a dashboard for admins to handle things going on with the whole site so to set up it, you need to:
+Seviatory is a site for reservation of specific created services and with a dashboard for admins to handle things going on with the whole site so to set up it and for user, he can reserve a service but not double booking allowed for sure, you need to:
 
 
 ## Requirements
